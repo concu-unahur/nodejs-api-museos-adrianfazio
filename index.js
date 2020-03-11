@@ -29,19 +29,35 @@ function escribirMuseosEnArchivo(error, respuesta) {
   //museos.array.forEach(element => {
   //fs.writeFile("museos.txt", museos[0].nombre, avisarQueTerminamos);
   //});
+  // Debe haber una línea por cada museo, con este formato:
+  // NOMBRE (DIRECCION). Por cualquier consulta comunicarse al TELEFONO
+  //Borro el archivo museos.txt para poder empezar a llenarlo con los nuevos museos.
+  fs.unlink("museos.txt", err => {
+    if (err) throw err;
+    console.log("Borramos el archivo museos.txt");
+  });
+
+  var i = 0;
+  for (i in museos) {
+    console.log(museos[i]);
+  }
+
   var i = 0;
   for (i in museos) {
     fs.appendFile("museos.txt", museos[i].nombre, avisarQueTerminamos);
-    fs.appendFile("museos.txt", museos[i].direccion, avisarQueTerminamos);
-    fs.appendFile("museos.txt", museos[i].telefono, avisarQueTerminamos);
+    fs.appendFile(
+      "museos.txt",
+      " (" + museos[i].direccion + ")",
+      avisarQueTerminamos
+    );
+    fs.appendFile(
+      "museos.txt",
+      ". Por cualquier consulta comunicarse al " + museos[i].telefono,
+      avisarQueTerminamos
+    );
     fs.appendFile("museos.txt", "\n", avisarQueTerminamos);
   }
-
-  //for (var i=0; i<museos.length; i++){
-  //  fs.writeFile("museos.txt", museos[indice].nombre, avisarQueTerminamos);
 }
-//Debe haber una línea por cada museo, con este formato:
-// NOMBRE (DIRECCION). Por cualquier consulta comunicarse al TELEFONO
 
 // Estos parámetros son los que manda fs.writeFile al callback.
 // En este caso solo hay uno, el posible error. Si la escritura funciona, no se manda nada.

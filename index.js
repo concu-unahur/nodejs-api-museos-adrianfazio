@@ -39,23 +39,11 @@ function escribirMuseosEnArchivo(error, respuesta) {
 
   var i = 0;
   for (i in museos) {
-    console.log(museos[i]);
-  }
-
-  var i = 0;
-  for (i in museos) {
-    fs.appendFile("museos.txt", museos[i].nombre, avisarQueTerminamos);
-    fs.appendFile(
-      "museos.txt",
-      " (" + museos[i].direccion + ")",
-      avisarQueTerminamos
-    );
-    fs.appendFile(
-      "museos.txt",
-      ". Por cualquier consulta comunicarse al " + museos[i].telefono,
-      avisarQueTerminamos
-    );
-    fs.appendFile("museos.txt", "\n", avisarQueTerminamos);
+    fs.appendFile("museos.txt", 
+    museos[i].nombre+" (" +
+    museos[i].direccion + ")"+
+    ". Por cualquier consulta comunicarse al " + 
+    museos[i].telefono+"\n", avisarQueTerminamos);
   }
 }
 

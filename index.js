@@ -46,6 +46,7 @@ function escribirMuseosEnArchivo(error, respuesta) {
   var i = 0;
   for (i in museos) {
     fs.appendFile("museos.txt", 
+    "Museo: " +  
     museos[i].nombre+" (" +
     museos[i].direccion + ")"+
     ". Por cualquier consulta comunicarse al " + 
@@ -74,7 +75,7 @@ function escribirOrganismosEnArchivo(error, respuesta) {
   var i = 0;
   for (i in organismos) {
     fs.appendFile("organismos.txt", 
-    "Organismos: " +  
+    "Organismo: " +  
     organismos[i].nombre + " (" + 
     organismos[i].direccion + ")" + ". Por cualquier consulta comunicarse al " + 
     organismos[i].telefono+"\n", avisarQueTerminamos);

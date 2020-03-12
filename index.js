@@ -31,11 +31,15 @@ function escribirMuseosEnArchivo(error, respuesta) {
   //});
   // Debe haber una línea por cada museo, con este formato:
   // NOMBRE (DIRECCION). Por cualquier consulta comunicarse al TELEFONO
-  //Borro el archivo museos.txt para poder empezar a llenarlo con los nuevos museos.
-  fs.unlink("museos.txt", err => {
-    if (err) throw err;
-    console.log("Borramos el archivo museos.txt");
-  });
+  // Borro el archivo museos.txt para poder empezar a llenarlo con los nuevos museos.
+  try {
+    if (fs.existsSync('museos.txt')) {
+      fs.unlinkSync('museos.txt');
+      console.log('museos.txt borrado con exito!');
+    }
+  } catch(err) {
+    console.error(err)
+  }
 
   var i = 0;
   for (i in museos) {
@@ -46,7 +50,6 @@ function escribirMuseosEnArchivo(error, respuesta) {
     museos[i].telefono+"\n", avisarQueTerminamos);
   }
 }
-
 // Estos parámetros son los que manda fs.writeFile al callback.
 // En este caso solo hay uno, el posible error. Si la escritura funciona, no se manda nada.
 function avisarQueTerminamos(error) {
